@@ -4,12 +4,15 @@ import './todo-list.css'
 
 
 
-const TodoList = ({TodoData}) => {
+const TodoList = ({TodoData, OnDeleted}) => {
     const ListItem = TodoData.map((items)=>{
         const {id, ...itemObj} = items;
         return (
             <li key={id} className='list-group-item'>
-                <TodoListItem {...itemObj}/>
+                <TodoListItem
+                    {...itemObj}
+                    OnDeleted = {() => OnDeleted(id)}
+                />
             </li>
         );
     });
