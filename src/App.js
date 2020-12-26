@@ -11,8 +11,7 @@ const App = () => {
     const TodoData = [
         {label: "Hello my name is Petya", important: true, id: 1},
         {label: "Hello my name is Petya", important: false, id: 2},
-        {label: "Hello my name is Petya", important: false, id: 3},
-        {label: "Hello my name is Petya", important: true, id: 4},
+
     ]
     return (
         <div className='todo-app'>
