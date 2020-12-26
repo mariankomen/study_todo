@@ -3,7 +3,9 @@ import TodoListItem from "./todo-list-item";
 
 const TodoList = ({TodoData}) => {
 
-    const ListItem = TodoData.map((items)=> <TodoListItem {...items}/>)
+    const {id, ...itemObj} = TodoData;
+
+    const ListItem = TodoData.map((items)=> <li key={items.id}><TodoListItem {...itemObj}/></li>)
 
     return (
         <div>

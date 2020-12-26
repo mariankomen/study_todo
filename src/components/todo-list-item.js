@@ -5,7 +5,7 @@ const TodoListItem = ({label, important = false}) => {
         color: important ? 'tomato' : 'black'
     };
     return (
-        <div style={style}>{label}</div>
+        <span style={style}>{label}</span>
     );
 }
 
