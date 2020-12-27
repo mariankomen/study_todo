@@ -1,6 +1,5 @@
 import React from 'react';
 import './app-header.css'
-import ItemStatusFilter from "../item-status-filter/item-status-filter";
 
 const AppHeader = ({toDo, done}) => {
     return (
