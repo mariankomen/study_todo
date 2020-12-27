@@ -14,9 +14,10 @@ export default class App extends Component {
             this.CreateToDoItem("Drink coffe"),
             this.CreateToDoItem("learn react"),
             this.CreateToDoItem("jumaaa"),
-        ], term: ''
+        ],
+        term: '',
+        filter: ''
     }
-
 
     AddItem = (text) => {
         const NewItem = this.CreateToDoItem(text);
@@ -83,30 +84,49 @@ export default class App extends Component {
     }
 
     search(ITEMS, term) {
-        if(term === 0){
+        if (term === 0) {
             return ITEMS;
         }
-        return ITEMS.filter((item)=>{
+        return ITEMS.filter((item) => {
             return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
         });
     }
+
     OnSearchChange = (term) => {
         this.setState({term});
     };
+    onFilterChange = (filter) => {
+        this.setState({filter})
+    }
+    filter(items, filter) {
+        switch (filter) {
+            case 'all':
+                return items;
+            case 'active':
+                return items.filter((item) => !item.done)
+            case 'done':
+                return items.filter((item) => item.done)
+            default:
+                return items;
+        }
+    }
 
 
     render() {
         // const TODODATA = this.state.TodoData;
-        const {TodoData, term} = this.state;
+        const {TodoData, term, filter} = this.state;
         const DoneItems = TodoData.filter((el) => el.done).length;
         const TodoCount = TodoData.filter((el) => !el.done).length;
-        const VisibleItems = this.search(TodoData, term)
+        const VisibleItems = this.filter(this.search(TodoData, term), filter)
         return (
             <div className='todo-app'>
                 <AppHeader toDo={TodoCount} done={DoneItems}/>
                 <div className="top-panel d-flex">
                     <SerchPanel OnSearchChange={this.OnSearchChange}/>
-                    <ItemStatusFilter/>
+                    <ItemStatusFilter filter={filter}
+                                      onFilterChange={this.onFilterChange}
+
+                    />
                 </div>
 
                 <TodoList TodoData={VisibleItems}
